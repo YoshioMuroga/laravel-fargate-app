@@ -1,5 +1,5 @@
 FROM php:8.0-fpm-buster
-LABEL maintainer="ucan-lab <yes@u-can.pro>"
+LABEL maintainer="daitec <y.muroga@daitecjp.com>"
 SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
 
 # timezone environment
@@ -27,5 +27,7 @@ RUN apt-get update && \
 
 COPY ./infra/docker/php/php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 COPY ./infra/docker/php/php.ini /usr/local/etc/php/php.ini
+
+COPY --chown=www-data:www-data ./backend /work/backend
 
 WORKDIR /work/backend
